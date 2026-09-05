@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Dark Mode for Stripe Dashboard">
+  <!-- The extension's own mark: a crescent that inverts across the light/dark split, which is what the theme does. -->
+  <defs>
+    <clipPath id="tile"><rect width="256" height="256" rx="58"/></clipPath>
+    <clipPath id="lightHalf"><polygon points="0,0 256,0 0,256"/></clipPath>
+    <clipPath id="darkHalf"><polygon points="256,0 256,256 0,256"/></clipPath>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect width="256" height="256" fill="#F4F5F9"/>
+    <polygon points="256,0 256,256 0,256" fill="#12141C"/>
+    <g clip-path="url(#lightHalf)"><circle cx="126" cy="130" r="66" fill="#12141C"/><circle cx="154" cy="112" r="55" fill="#F4F5F9"/></g>
+    <g clip-path="url(#darkHalf)"><circle cx="126" cy="130" r="66" fill="#F4F5F9"/><circle cx="154" cy="112" r="55" fill="#12141C"/></g>
+  </g>
+  <rect x="1.5" y="1.5" width="253" height="253" rx="57" fill="none" stroke="#000" stroke-opacity="0.14" stroke-width="3"/>
+</svg>

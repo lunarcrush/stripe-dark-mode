@@ -25,9 +25,9 @@ SOFTWARE.
 Trademarks and brand assets
 
 The MIT license above covers the source code of this extension. It does not
-grant any rights to the LunarCrush name, logo, mark or wordmark, including the
-files under icons/, popup/lc-mark.svg, popup/lc-wordmark.svg and store/brand/,
-which are trademarks of LunarCrush, Inc. and are included only so the project
-can be built as published. "Stripe" is a trademark of Stripe, Inc.; this
+grant any rights to the LunarCrush name, logo, mark or wordmark (popup/lc-mark.svg,
+popup/lc-wordmark.svg and store/brand/), which are trademarks of LunarCrush, Inc.,
+nor to the extension's own icon artwork under icons/, which is copyright
+LunarCrush, Inc. Both are included only so the project can be built as published. "Stripe" is a trademark of Stripe, Inc.; this
 project is not affiliated with or endorsed by Stripe. Bundled fonts carry
 their own licenses (see popup/fonts/OFL.txt).

@@ -9,6 +9,10 @@ body{font-family:"Plus Jakarta Sans",-apple-system,sans-serif;color:var(--body);
 .glow{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none}
 .g1{background:rgba(20,184,129,.35)}.g2{background:rgba(110,166,248,.28)}
 .wm{height:22px;width:auto;display:block}
+.lockup{display:inline-flex;align-items:center;gap:10px;color:var(--heading);font-weight:600;font-size:15px;letter-spacing:-.2px}
+.lockup em{font-style:normal;font-weight:500;color:var(--body)}
+.lockup .appicon{width:28px;height:28px;border-radius:8px;display:block}
+.marq .lockup{font-size:18px}.marq .lockup .appicon{width:34px;height:34px;border-radius:10px}.small .lockup{font-size:13px}.small .lockup .appicon{width:22px;height:22px;border-radius:6px}
 .kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--blue)}
 h1{color:var(--heading);font-weight:600;letter-spacing:-1px;line-height:1.08;margin:0}
 h1 em{font-family:Butler,"Plus Jakarta Sans",serif;font-style:normal;font-weight:400;color:var(--green-bright)}
@@ -49,7 +53,7 @@ p{margin:0;line-height:1.5}
 </style></head><body>
 <script>
 const q=new URLSearchParams(location.search), kind=q.get("kind")||"small", shot=q.get("shot")||"../assets/01-dashboard-dark.png";
-const WM='<img class="wm" src="../brand/full-white.svg" alt="LunarCrush">';
+const WM='<span class="lockup"><img class="appicon" src="../../icons/icon128.png" alt=""><span>Dark Mode <em>for Stripe Dashboard</em></span></span>';
 const MADE=`<span class="chip">Made by <img src="../brand/full-white.svg" alt="LunarCrush"></span>`;
 const T={
  small:`<div class="tile small"><div class="glow g1"></div><div class="glow g2"></div>${WM}

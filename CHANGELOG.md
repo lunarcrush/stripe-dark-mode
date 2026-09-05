@@ -2,6 +2,9 @@
 
 All notable changes to this project are documented here. Versions follow [SemVer](https://semver.org); the `version` in `manifest.json` is the source of truth and every release is tagged `v<version>`.
 
+## [1.0.1] - 2026-09-04
+- The extension has its own mark: a crescent that inverts across a light/dark split (`icons/icon.svg`), replacing the LunarCrush mark in the toolbar icon, popup header, store icon and promo tiles. LunarCrush appears only as the maker ("Made by LunarCrush" wordmark in the popup footer and tiles).
+
 ## [1.0.0] - 2026-09-04
 First store release. Made by LunarCrush.
 - Support contact is support@lunarcrush.com: privacy policy, security policy, store listing, and the popup's "Send feedback" link (opens a pre-addressed email).
