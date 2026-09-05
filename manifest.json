@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Dark Mode for Stripe Dashboard by LunarCrush",
   "short_name": "Dashboard Dark",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Dark mode for dashboard.stripe.com. One-click toggle, tunable intensity, images keep true color, zero tracking. Made by LunarCrush.",
   "homepage_url": "https://lunarcrush.com",
   "icons": {
