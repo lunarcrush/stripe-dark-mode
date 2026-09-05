@@ -1,0 +1,32 @@
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Tag must match manifest version
+        run: |
+          V=$(python3 -c "import json;print(json.load(open('manifest.json'))['version'])")
+          [ "v$V" = "${GITHUB_REF_NAME}" ] || { echo "tag ${GITHUB_REF_NAME} != manifest v$V"; exit 1; }
+      - name: Build
+        run: bash build.sh
+      - name: Install Playwright Chromium
+        run: pip install playwright pillow && playwright install --with-deps chromium
+      - name: Smoke test (packaged Chrome build)
+        run: python3 tests/smoke.py --ext dist/build/chrome
+      - name: Release notes from CHANGELOG
+        run: |
+          V=${GITHUB_REF_NAME#v}
+          awk -v v="$V" '/^## \[/{p=($0 ~ "\\["v"\\]")} p' CHANGELOG.md > notes.md
+          [ -s notes.md ] || echo "Release $GITHUB_REF_NAME" > notes.md
+          cat notes.md
+      - name: Publish GitHub Release
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh release create "$GITHUB_REF_NAME" dist/*.zip dist/SHA256SUMS --title "$GITHUB_REF_NAME" --notes-file notes.md

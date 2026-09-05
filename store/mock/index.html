@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Acme Demo Roasters – Dashboard</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- SYNTHETIC DEMO PAGE. Every business, person, amount, card and date on this page is invented for store screenshots.
+     Nothing here is real Stripe data or real Stripe UI code. Used only to render listing images for the extension. -->
+<style>
+:root{--bg:#fff;--side:#f7f8fa;--t1:#30313d;--t2:#687385;--t3:#87909f;--line:#e3e8ee;--line2:#ebeef1;--p:#635bff;--p2:#533afd;--ok-bg:#d7f7c2;--ok:#006908;--warn-bg:#fcedb9;--warn:#b13600;--neu-bg:#ebeef1;--neu:#545969;--bad-bg:#ffe7f2;--bad:#b3093c;--info-bg:#cff5f6;--info:#0055bc;--orange:#ed6704}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--t1);background:var(--bg);display:flex;min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:var(--p);text-decoration:none}
+aside{width:232px;flex:none;background:var(--side);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:12px 10px}
+.acct{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-weight:600;cursor:pointer}
+.acct:hover{background:#eef0f3}
+.acct .lg{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#7b61ff,#635bff);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.acct .chev{margin-left:auto;color:var(--t3)}
+nav{margin-top:10px;display:flex;flex-direction:column;gap:2px}
+nav .sect{font-size:12px;color:var(--t3);font-weight:600;margin:14px 10px 4px}
+nav a{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:8px;color:var(--t1);font-weight:500}
+nav a:hover{background:#eef0f3}
+nav a.on{color:var(--p);background:#eceefe}
+nav a svg{width:16px;height:16px;flex:none;color:var(--t2)}
+nav a.on svg{color:var(--p)}
+nav a .arrow{margin-left:auto;color:var(--t3);font-size:12px}
+.sidefoot{margin-top:auto;padding:8px 10px;color:var(--t2);display:flex;justify-content:space-between;font-weight:500}
+main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{height:60px;display:flex;align-items:center;gap:12px;padding:0 24px;border-bottom:1px solid var(--line)}
+.search{flex:1;max-width:560px;display:flex;align-items:center;gap:10px;height:36px;border:1px solid var(--line);border-radius:8px;padding:0 12px;color:var(--t3);background:#fff}
+.search kbd{margin-left:auto;font:11px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--t3)}
+.tright{margin-left:auto;display:flex;align-items:center;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:8px;border:1px solid var(--line);font-weight:500;color:var(--t1);background:#fff}
+.chip.sandbox{color:var(--orange);border-color:#f8c9a3;background:#fff6ee}
+.chip.sandbox i{width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.chip.demo{color:var(--t2);border-style:dashed}
+.ib{width:32px;height:32px;display:grid;place-items:center;border-radius:8px;color:var(--t2)}
+.ib:hover{background:#f0f2f5}
+.ib svg{width:16px;height:16px}
+.avatar{width:28px;height:28px;border-radius:50%;object-fit:cover;display:block}
+.content{padding:28px 32px 40px;max-width:1160px;width:100%}
+h1{font-size:24px;font-weight:700;letter-spacing:-.3px;margin:0}
+h2{font-size:18px;font-weight:700;margin:0;letter-spacing:-.2px}
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.hd .r{margin-left:auto;display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:#fff;font-weight:600;color:var(--t1);box-shadow:0 1px 1px rgba(0,0,0,.04)}
+.btn.pri{background:var(--p);border-color:var(--p);color:#fff}
+.btn svg{width:14px;height:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:28px}
+.stat{padding:16px 18px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat .l{color:var(--t2);font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px}
+.stat .v{font-size:22px;font-weight:700;margin:6px 0 2px;letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+.stat .d{font-size:12px;color:var(--t2)}
+.stat .d b{color:var(--ok);font-weight:600}
+.stat svg.spark{width:100%;height:36px;margin-top:8px}
+.range{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:#fff}
+.card .ct{display:flex;align-items:center;gap:8px;font-weight:600}
+.card .ct .more{margin-left:auto;color:var(--t3)}
+.card .cv{font-size:20px;font-weight:700;margin-top:6px;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.card .cd{font-size:12px;color:var(--t2)}
+.card .cd b{color:var(--ok);font-weight:600}
+.card .cd b.neg{color:var(--bad)}
+.chart{width:100%;height:150px;margin-top:10px;display:block}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--t2);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:2px;background:var(--p);vertical-align:middle;margin-right:6px;border-radius:2px}
+.legend i.prev{background:#c0c8d2}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-top:4px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--t2);font-weight:600;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 12px;border-bottom:1px solid var(--line2);vertical-align:middle;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.amt{font-weight:600;text-align:right}
+td.mute,th.mute{color:var(--t2)}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:2px 7px;border-radius:5px;background:var(--neu-bg);color:var(--neu)}
+.badge.ok{background:var(--ok-bg);color:var(--ok)}
+.badge.warn{background:var(--warn-bg);color:var(--warn)}
+.badge.bad{background:var(--bad-bg);color:var(--bad)}
+.badge.info{background:var(--info-bg);color:var(--info)}
+.cardico{display:inline-grid;place-items:center;width:28px;height:18px;vertical-align:middle;margin-right:6px}
+.cardico svg{display:block}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.tabs a{padding:8px 12px;font-weight:600;color:var(--t2);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs a.on{color:var(--p);border-color:var(--p)}
+.tabs a span{margin-left:6px;font-size:12px;color:var(--t3);font-weight:600}
+.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filters .chip{height:28px;font-size:13px;color:var(--t2)}
+.filters .chip svg{width:12px;height:12px}
+.tfoot{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;color:var(--t2);font-size:13px}
+.pg{display:flex;gap:6px}.pg .btn{height:28px;padding:0 10px}
+.crumb{color:var(--t2);font-size:13px;margin-bottom:10px}
+.cust{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.cust img{width:56px;height:56px;border-radius:50%}
+.cust .n{font-size:24px;font-weight:700;letter-spacing:-.3px}
+.cust .e{color:var(--t2)}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:8px 12px;font-size:13px;margin-top:12px}
+.kv .k{color:var(--t2)}
+.sec{margin-top:26px}
+.sec .hd{margin-bottom:10px}
+.pm{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line2)}
+.pm:last-child{border-bottom:0}
+.pm .d{margin-left:auto;color:var(--t2);font-size:13px}
+.prod{display:flex;align-items:center;gap:12px}
+.prod img{width:40px;height:40px;border-radius:8px;object-fit:cover}
+.insights{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ins{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.ins .l{font-size:12px;color:var(--t2);font-weight:600}
+.ins .v{font-size:20px;font-weight:700;margin-top:4px;letter-spacing:-.3px}
+.ins .s{font-size:12px;color:var(--t2)}
+.banner{display:flex;align-items:center;gap:10px;background:#fff6ee;border:1px solid #f8c9a3;color:#7a3a00;border-radius:10px;padding:10px 14px;margin-bottom:18px;font-size:13px}
+.banner b{color:var(--orange)}
+</style></head>
+<body>
+<aside>
+  <div class="acct"><span class="lg">A</span>Acme Demo Roasters<span class="chev">⌄</span></div>
+  <nav id="nav"></nav>
+  <div class="sidefoot"><span>Developers</span><span>⌘ /</span></div>
+</aside>
+<main>
+  <div class="top">
+    <div class="search"><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>Search<kbd>⌘K</kbd></div>
+    <div class="tright">
+      <span class="chip sandbox"><i></i>Sandbox</span>
+      <span class="chip demo">Synthetic demo data</span>
+      <span class="chip">Developers</span>
+      <span class="ib"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 11V7a4 4 0 118 0v4l1 1H3l1-1zM6.5 13.5a1.5 1.5 0 003 0"/></svg></span>
+      <span class="ib"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4"/></svg></span>
+      <span class="ib"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.3"/><path d="M6.2 6.3a1.9 1.9 0 113.2 1.4c-.8.6-1.4.9-1.4 1.8M8 12h.01"/></svg></span>
+      <img class="avatar" id="me" alt="">
+    </div>
+  </div>
+  <div class="content" id="content"></div>
+</main>
+<script>
+// ---------- synthetic data (all invented) ----------
+const AV = (init, bg) => "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'><rect width='96' height='96' rx='48' fill='${bg}'/><text x='48' y='58' font-family='-apple-system,Helvetica,Arial' font-size='34' font-weight='700' text-anchor='middle' fill='#fff'>${init}</text></svg>`);
+const PRODUCT = "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f59e0b'/><stop offset='1' stop-color='#b45309'/></linearGradient></defs><rect width='160' height='160' rx='24' fill='url(#g)'/><rect x='40' y='30' width='80' height='110' rx='14' fill='#3b2412'/><rect x='52' y='44' width='56' height='24' rx='6' fill='#fde68a'/><circle cx='80' cy='104' r='16' fill='#f59e0b'/></svg>`);
+const PEOPLE = [
+ ["Talia Vandermeer","talia.demo@example.com","TV","#6366f1"],["Oren Castellanos","oren.demo@example.com","OC","#0ea5e9"],
+ ["Bexley Hartigan","bexley.demo@example.com","BH","#ec4899"],["Noor Adeyemi-Park","noor.demo@example.com","NA","#10b981"],
+ ["Cassian Whitlow","cassian.demo@example.com","CW","#f59e0b"],["Ines Baroudi","ines.demo@example.com","IB","#8b5cf6"],
+ ["Teodor Lindqvist","teodor.demo@example.com","TL","#ef4444"],["Maren Okafor-Ross","maren.demo@example.com","MO","#14b8a6"],
+ ["Jules Fontaine","jules.demo@example.com","JF","#f97316"],["Sunniva Halloran","sunniva.demo@example.com","SH","#3b82f6"],
+ ["Rafi Delacroix","rafi.demo@example.com","RD","#a855f7"],["Wren Tamura","wren.demo@example.com","WT","#22c55e"]];
+const DESC = ["Demo Reserve · Monthly","Single-origin sampler (3 × 12 oz)","Cold brew concentrate 32 oz","Barista workshop · Sep 12","Demo Reserve · Monthly","Gift card","House blend 5 lb","Pour-over kit","Demo Reserve · Annual","Espresso blend 2 lb","Cold brew concentrate 32 oz","Decaf sampler"];
+const AMTS = [24.00,42.50,18.00,95.00,24.00,50.00,68.00,39.00,240.00,29.50,18.00,36.00];
+const STAT = ["ok","ok","ok","ok","warn","ok","bad","ok","ok","ok","info","ok"];
+const STXT = {ok:"Succeeded",warn:"Uncaptured",bad:"Failed",info:"Refunded"};
+const CARDS = [["card","4242"],["card","5556"],["card","1881"],["card","1005"],["card","4242"],["card","4444"],["card","0341"],["card","5100"],["card","4242"],["card","3714"],["card","1111"],["card","2222"]];
+const DATES = ["Sep 4, 3:41 PM","Sep 4, 2:07 PM","Sep 4, 11:52 AM","Sep 4, 9:18 AM","Sep 3, 6:30 PM","Sep 3, 4:12 PM","Sep 3, 1:45 PM","Sep 3, 10:02 AM","Sep 2, 8:20 PM","Sep 2, 3:33 PM","Sep 2, 11:10 AM","Sep 1, 5:55 PM"];
+const cardIco = (b) => `<span class="cardico"><svg viewBox="0 0 28 18" width="28" height="18"><rect x="1" y="1" width="26" height="16" rx="3" fill="#fff" stroke="#c4cbd4"/><rect x="1" y="5" width="26" height="3" fill="#8b95a5"/><rect x="5" y="11" width="8" height="2" rx="1" fill="#c4cbd4"/></svg></span>`;
+const money = (n) => "$" + n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+// seeded series
+let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+const series = (n, base, amp) => Array.from({length:n}, (_, i) => base + amp * (0.5 + 0.5*Math.sin(i/2.3)) + amp * 0.35 * (rnd()-0.5));
+const path = (pts, w, h, pad=4) => { const mx=Math.max(...pts), mn=Math.min(...pts)*0.85; return pts.map((v,i)=>`${i?"L":"M"}${(i/(pts.length-1))*w},${h-pad-((v-mn)/(mx-mn))*(h-2*pad)}`).join(" "); };
+const line = (pts, w, h, col, dash="") => `<path d="${path(pts,w,h)}" fill="none" stroke="${col}" stroke-width="2" ${dash?`stroke-dasharray="${dash}"`:""} vector-effect="non-scaling-stroke"/>`;
+const area = (pts, w, h, col) => `<path d="${path(pts,w,h)} L${w},${h} L0,${h} Z" fill="${col}" opacity=".12"/>`;
+const bars = (pts, w, h, col) => { const mx=Math.max(...pts); const bw=w/pts.length; return pts.map((v,i)=>`<rect x="${i*bw+bw*0.2}" y="${h-(v/mx)*(h-6)}" width="${bw*0.6}" height="${(v/mx)*(h-6)}" rx="2" fill="${col}"/>`).join(""); };
+const chart = (inner, h=150, cls="chart") => `<svg class="${cls}" viewBox="0 0 600 ${h}" preserveAspectRatio="none">${inner}</svg>`;
+
+// ---------- nav ----------
+const I = {
+ home:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 7.5L8 2.5l5.5 5v6h-4v-4h-3v4h-4z"/></svg>',
+ bal:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="12" height="9" rx="1.5"/><path d="M2 7.5h12M5 10.5h2"/></svg>',
+ tx:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h10M10 2l3 3-3 3M13 11H3M6 8l-3 3 3 3"/></svg>',
+ cus:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 13.5c.6-2.6 2.4-4 5-4s4.4 1.4 5 4"/></svg>',
+ cat:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 5.5L8 2.5l5.5 3v5L8 13.5l-5.5-3z"/><path d="M8 8.5v5M2.5 5.5L8 8.5l5.5-3"/></svg>',
+ pay:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3.5" width="12" height="9" rx="1.5"/><path d="M2 6.5h12"/></svg>',
+ sub:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 8a5 5 0 01-8.5 3.5M3 8a5 5 0 018.5-3.5M11.5 2v3h-3M4.5 14v-3h3"/></svg>',
+ inv:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 2h6l3 3v9H4z"/><path d="M6 8h5M6 11h5"/></svg>',
+ rep:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 13.5h11M4 11V7M7.5 11V4M11 11V8.5"/></svg>',
+ bill:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 2.5h10v11l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5z"/><path d="M6 6h4M6 9h4"/></svg>',
+ more:'<svg viewBox="0 0 16 16" fill="currentColor"><circle cx="3.5" cy="8" r="1.3"/><circle cx="8" cy="8" r="1.3"/><circle cx="12.5" cy="8" r="1.3"/></svg>'
+};
+const page = (() => { const p = location.pathname; if (/payments/.test(p)) return "payments"; if (/customers/.test(p)) return "customer"; return "home"; })();
+document.getElementById("nav").innerHTML = `
+ <a class="${page==="home"?"on":""}" href="#">${I.home}Home</a><a href="#">${I.bal}Balances</a><a href="#">${I.tx}Transactions</a>
+ <a class="${page==="customer"?"on":""}" href="#">${I.cus}Customers</a><a href="#">${I.cat}Product catalog</a>
+ <div class="sect">Shortcuts</div>
+ <a class="${page==="payments"?"on":""}" href="#">${I.pay}Payments</a><a href="#">${I.sub}Subscriptions</a><a href="#">${I.inv}Invoices</a><a href="#">${I.rep}Reports</a>
+ <div class="sect">Products</div>
+ <a href="#">${I.pay}Payments<span class="arrow">›</span></a><a href="#">${I.bill}Billing<span class="arrow">›</span></a><a href="#">${I.rep}Reporting<span class="arrow">›</span></a><a href="#">${I.more}More<span class="arrow">›</span></a>`;
+document.getElementById("me").src = AV("JD","#0f766e");
+
+// ---------- pages ----------
+const rowsHTML = (n, withCustomer=true) => Array.from({length:n},(_,i)=>{ const p=PEOPLE[i%PEOPLE.length]; const c=CARDS[i%CARDS.length]; return `<tr>
+ <td class="amt">${money(AMTS[i%AMTS.length])}</td><td class="mute">USD</td>
+ <td><span class="badge ${STAT[i%STAT.length]}">${STXT[STAT[i%STAT.length]]}</span></td>
+ <td>${cardIco(c[0])}<span class="mute">•••• ${c[1]}</span></td>
+ <td>${DESC[i%DESC.length]}</td>${withCustomer?`<td><a href="#">${p[1]}</a></td>`:""}<td class="mute">${DATES[i%DATES.length]}</td></tr>`; }).join("");
+
+const HOME = () => {
+  const gv = series(24, 180, 260), gvPrev = series(24, 150, 220), net = series(7, 900, 1400), netPrev = series(7, 800, 1200), nc = [4,7,5,9,6,11,8], sp = series(7, 60, 40), spark = series(12, 100, 80);
+  return `
+  <div class="banner"><b>Synthetic demo data</b> This is a simulated business used for screenshots. Every customer, payment and figure on this page is invented. <a href="#">Learn more</a></div>
+  <div class="hd"><h1>Today</h1><span class="chip" style="margin-left:6px">Sep 4, 2026</span><div class="r"><span class="btn">Customize</span></div></div>
+  <div class="stats">
+    <div class="stat"><div class="l">Gross volume</div><div class="v">$4,812.40</div><div class="d"><b>+12.4%</b> vs. yesterday</div>${chart(area(spark,600,36,"#635bff")+line(spark,600,36,"#635bff"),36,"spark")}</div>
+    <div class="stat"><div class="l">Yesterday</div><div class="v">$4,280.10</div><div class="d">Sep 3</div>${chart(line(series(12,90,70),600,36,"#c0c8d2"),36,"spark")}</div>
+    <div class="stat"><div class="l">USD balance</div><div class="v">$18,204.55</div><div class="d">Available soon $2,105.00 · <a href="#">View</a></div></div>
+    <div class="stat"><div class="l">Payouts</div><div class="v">$6,340.00</div><div class="d">Expected Sep 8 · <a href="#">View</a></div></div>
+  </div>
+  <div class="hd"><h2>Your overview</h2><div class="r"><span class="chip">Last 7 days ⌄</span><span class="chip">compared to Previous period ⌄</span><span class="chip">Daily ⌄</span></div></div>
+  <div class="grid2">
+    <div class="card"><div class="ct">Gross volume<span class="more">···</span></div><div class="cv">$27,318.92</div><div class="cd"><b>+8.1%</b> vs. $25,271.40 previous period</div>
+      ${chart(area(gv,600,150,"#635bff")+line(gvPrev,600,150,"#c0c8d2","4 4")+line(gv,600,150,"#635bff"))}
+      <div class="axis"><span>Aug 29</span><span>Aug 31</span><span>Sep 2</span><span>Sep 4</span></div><div class="legend"><span><i></i>Last 7 days</span><span><i class="prev"></i>Previous period</span></div></div>
+    <div class="card"><div class="ct">Net volume from sales<span class="more">···</span></div><div class="cv">$25,904.16</div><div class="cd"><b>+7.6%</b> vs. previous period</div>
+      ${chart(line(netPrev,600,150,"#c0c8d2","4 4")+line(net,600,150,"#635bff"))}
+      <div class="axis"><span>Aug 29</span><span>Aug 31</span><span>Sep 2</span><span>Sep 4</span></div></div>
+    <div class="card"><div class="ct">New customers<span class="more">···</span></div><div class="cv">50</div><div class="cd"><b>+19.0%</b> vs. 42 previous period</div>
+      ${chart(bars(nc,600,150,"#635bff"))}
+      <div class="axis"><span>Aug 29</span><span>Aug 31</span><span>Sep 2</span><span>Sep 4</span></div></div>
+    <div class="card"><div class="ct">Successful payments<span class="more">···</span></div><div class="cv">412</div><div class="cd"><b class="neg">−2.3%</b> vs. 422 previous period</div>
+      ${chart(area(sp,600,150,"#635bff")+line(sp,600,150,"#635bff"))}
+      <div class="axis"><span>Aug 29</span><span>Aug 31</span><span>Sep 2</span><span>Sep 4</span></div></div>
+  </div>
+  <div class="sec"><div class="hd"><h2>Recent payments</h2><div class="r"><a class="btn" href="#">View all</a></div></div>
+    <div class="card" style="padding:0 6px"><table><thead><tr><th style="text-align:right">Amount</th><th></th><th>Status</th><th>Payment method</th><th>Description</th><th>Customer</th><th>Date</th></tr></thead><tbody>${rowsHTML(5)}</tbody></table></div></div>`;
+};
+
+const PAYMENTS = () => `
+  <div class="hd"><h1>Payments</h1><div class="r"><span class="btn">Analyze</span><span class="btn">Export</span><span class="btn pri">+ Create payment</span></div></div>
+  <div class="tabs"><a class="on" href="#">All</a><a href="#">Succeeded<span>396</span></a><a href="#">Refunded<span>7</span></a><a href="#">Disputed<span>1</span></a><a href="#">Failed<span>9</span></a><a href="#">Uncaptured<span>3</span></a></div>
+  <div class="filters"><span class="chip">Date and time ⌄</span><span class="chip">Amount ⌄</span><span class="chip">Currency ⌄</span><span class="chip">Status ⌄</span><span class="chip">Payment method ⌄</span><span class="chip">More filters ⌄</span><span class="chip" style="margin-left:auto">Edit columns</span></div>
+  <div class="card" style="padding:0 6px"><table><thead><tr><th style="text-align:right">Amount</th><th></th><th>Status</th><th>Payment method</th><th>Description</th><th>Customer</th><th>Date</th></tr></thead><tbody>${rowsHTML(12)}</tbody></table></div>
+  <div class="tfoot"><span>416 results</span><div class="pg"><span class="btn">Previous</span><span class="btn">Next</span></div></div>`;
+
+const CUSTOMER = () => { const p = PEOPLE[0]; return `
+  <div class="crumb"><a href="#">Customers</a> › cus_demo_9F2kQ7…</div>
+  <div class="cust"><img src="${AV(p[2],p[3])}" alt=""><div><div class="n">${p[0]}</div><div class="e">${p[1]} · Anytown, CA · Customer since Feb 2025</div></div>
+    <div class="hd" style="margin:0 0 0 auto"><div class="r"><span class="btn">Actions ⌄</span><span class="btn pri">+ Create payment</span></div></div></div>
+  <div class="insights">
+    <div class="ins"><div class="l">Total spend</div><div class="v">$1,284.50</div><div class="s">Lifetime</div></div>
+    <div class="ins"><div class="l">Payments</div><div class="v">38</div><div class="s">1 refund</div></div>
+    <div class="ins"><div class="l">Average order</div><div class="v">$33.80</div><div class="s">Last 12 months</div></div>
+    <div class="ins"><div class="l">Dispute losses</div><div class="v">$0.00</div><div class="s">0 disputes</div></div>
+  </div>
+  <div class="grid2 sec">
+    <div>
+      <div class="card"><div class="ct">Details<span class="more">Edit</span></div>
+        <div class="kv"><span class="k">Customer ID</span><span>cus_demo_9F2kQ7Lx</span><span class="k">Email</span><span>${p[1]}</span><span class="k">Phone</span><span>+1 (555) 010-0142</span><span class="k">Billing address</span><span>123 Example Street<br>Anytown, CA 12345</span><span class="k">Language</span><span>English (US)</span><span class="k">Tax status</span><span><span class="badge">Not taxable</span></span></div></div>
+      <div class="card sec"><div class="ct">Payment methods<span class="more">+ Add</span></div>
+        <div class="pm">${cardIco("card")}<span>Card •••• 4242</span><span class="badge ok">Default</span><span class="d">Expires 08/2029</span></div>
+        <div class="pm">${cardIco("card")}<span>Card •••• 5556</span><span class="d">Expires 11/2027</span></div></div>
+    </div>
+    <div>
+      <div class="card"><div class="ct">Subscriptions<span class="more">+ Create</span></div>
+        <div class="pm"><div class="prod"><img src="${PRODUCT}" alt=""><div><div style="font-weight:600">Demo Reserve · Monthly</div><div class="mute" style="font-size:12px;color:var(--t2)">$24.00 / month · Next invoice Oct 4</div></div></div><span class="badge ok" style="margin-left:auto">Active</span></div></div>
+      <div class="card sec"><div class="ct">Invoices<span class="more">View all</span></div>
+        <div class="pm"><span style="font-weight:600">$24.00</span><span class="badge ok">Paid</span><span class="mute" style="color:var(--t2)">A1F2-0038</span><span class="d">Sep 4</span></div>
+        <div class="pm"><span style="font-weight:600">$24.00</span><span class="badge ok">Paid</span><span class="mute" style="color:var(--t2)">A1F2-0037</span><span class="d">Aug 4</span></div>
+        <div class="pm"><span style="font-weight:600">$42.50</span><span class="badge ok">Paid</span><span class="mute" style="color:var(--t2)">A1F2-0036</span><span class="d">Jul 22</span></div></div>
+    </div>
+  </div>
+  <div class="sec"><div class="hd"><h2>Payments</h2><div class="r"><a class="btn" href="#">View all</a></div></div>
+    <div class="card" style="padding:0 6px"><table><thead><tr><th style="text-align:right">Amount</th><th></th><th>Status</th><th>Payment method</th><th>Description</th><th>Date</th></tr></thead><tbody>${rowsHTML(6,false)}</tbody></table></div></div>`; };
+
+document.getElementById("content").innerHTML = page==="payments" ? PAYMENTS() : page==="customer" ? CUSTOMER() : HOME();
+document.title = (page==="payments" ? "Payments" : page==="customer" ? PEOPLE[0][0] : "Home") + " – Acme Demo Roasters";
+</script>
+</body></html>

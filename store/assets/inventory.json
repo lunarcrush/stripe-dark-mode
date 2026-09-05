@@ -1,0 +1,38 @@
+{
+  "01-dashboard-dark.png": [
+    1280,
+    800
+  ],
+  "02-before-after.png": [
+    1280,
+    800
+  ],
+  "03-payments-dark.png": [
+    1280,
+    800
+  ],
+  "04-customer-popup.png": [
+    1280,
+    800
+  ],
+  "05-features.png": [
+    1280,
+    800
+  ],
+  "icon-128.png": [
+    128,
+    128
+  ],
+  "popup-320.png": [
+    320,
+    365
+  ],
+  "promo-marquee-1400x560.png": [
+    1400,
+    560
+  ],
+  "promo-small-440x280.png": [
+    440,
+    280
+  ]
+}

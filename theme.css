@@ -1,0 +1,55 @@
+/* Dark Mode for Stripe Dashboard by LunarCrush — theme.css
+ * Strategy: luminance inversion with hue preservation on the root, then
+ * re-invert photographic media so it keeps its true colors.
+ * invert(a) hue-rotate(180deg): white -> near-black, black -> near-white,
+ * brand hues (Stripe indigo, chart colors) keep their hue, only lightness flips.
+ * Tunables are CSS custom properties set by content.js from the popup.
+ */
+@media screen {
+  html[data-sdm="on"] {
+    --sdm-invert: 0.92;      /* 0.85 soft charcoal .. 1.0 pure black */
+    --sdm-brightness: 1;     /* 0.8 .. 1.1 */
+    --sdm-contrast: 1;       /* 0.9 .. 1.2 */
+    --sdm-media-invert: 1;   /* 1 = restore images, 0 = leave them inverted */
+    filter: invert(var(--sdm-invert)) hue-rotate(180deg)
+            brightness(var(--sdm-brightness)) contrast(var(--sdm-contrast)) !important;
+    background-color: #fff !important; /* becomes near-black after inversion; kills the white overscroll flash */
+    color-scheme: dark;
+  }
+
+  /* Restore true colors on photographic media. Composition order in the tree:
+     media gets its own invert first, then the root inverts it back. hue-rotate(180) x2 = identity. */
+  html[data-sdm="on"] :is(img, picture, video, [style*="background-image"], svg image, .sdm-keep) {
+    filter: invert(var(--sdm-media-invert)) hue-rotate(calc(180deg * var(--sdm-media-invert))) !important;
+  }
+
+  /* Small inline images (icons, logos as <img>) read better inverted with the UI. Opt-out list. */
+  html[data-sdm="on"] :is(img[src$=".svg"], img[src*="icon"], img[src*="logo"], img[width="16"], img[width="20"], img[width="24"]) {
+    filter: none !important;
+  }
+
+  /* Frames embedded in the Dashboard: the top document's root filter already inverts their pixels, so a frame's own
+     instance runs in "frame" mode with NO root filter (a second inversion would flip it light) and only restores media. */
+  html[data-sdm="frame"] :is(img, picture, video, [style*="background-image"], svg image, .sdm-keep) {
+    filter: invert(var(--sdm-media-invert, 1)) hue-rotate(calc(180deg * var(--sdm-media-invert, 1))) !important;
+  }
+  html[data-sdm="frame"] :is(img[src$=".svg"], img[src*="icon"], img[src*="logo"], img[width="16"], img[width="20"], img[width="24"]) {
+    filter: none !important;
+  }
+
+  /* Soften glow-like shadows that inversion turns into light halos. */
+  html[data-sdm="on"] [style*="box-shadow"] { box-shadow: none !important; }
+}
+
+/* Never print inverted. Invoices, receipts, reports stay light on paper. */
+@media print {
+  html[data-sdm="on"], html[data-sdm="on"] *, html[data-sdm="frame"] * { filter: none !important; }
+}
+
+/* Natively dark regions (tagged by content.js: Workbench, code panels, dark modals) are
+   re-inverted so they render as Stripe designed them. Media inside them needs no extra flip. */
+@media screen {
+  html[data-sdm="on"] [data-sdm-native] { filter: invert(1) hue-rotate(180deg) !important; }
+  html[data-sdm="on"] [data-sdm-native] :is(img, picture, video, [style*="background-image"], svg image) { filter: none !important; }
+  html[data-sdm="on"] [data-sdm-native] [data-sdm-native] { filter: none !important; }
+}

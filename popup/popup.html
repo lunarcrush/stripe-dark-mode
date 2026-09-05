@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Dark Mode for Stripe Dashboard by LunarCrush</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="tile"><img src="lc-mark.svg" alt=""></div>
+      <div class="t"><span class="name">Dark Mode</span><span class="sub">for the Stripe Dashboard</span></div>
+    </div>
+    <label class="switch" title="Toggle dark mode (Alt+Shift+D)"><input type="checkbox" id="enabled"><span class="slider"></span></label>
+  </header>
+  <main>
+    <div class="card">
+      <div class="row"><label for="invert">Intensity</label><input type="range" id="invert" min="0.85" max="1" step="0.01"><output id="invert-out"></output></div>
+      <div class="row"><label for="brightness">Brightness</label><input type="range" id="brightness" min="0.8" max="1.1" step="0.01"><output id="brightness-out"></output></div>
+      <div class="row"><label for="contrast">Contrast</label><input type="range" id="contrast" min="0.9" max="1.2" step="0.01"><output id="contrast-out"></output></div>
+    </div>
+    <div class="checks">
+      <label class="check" for="keepImages"><span>Keep images in true color</span><input type="checkbox" id="keepImages"></label>
+      <label class="check" for="dev" title="Unpacked installs: re-read theme.css on every page refresh"><span>Developer: hot-reload theme.css</span><input type="checkbox" id="dev"></label>
+    </div>
+    <div class="actions">
+      <button id="reset" type="button">Reset</button>
+      <button id="diag" type="button" title="Copies version, settings, the current route with every Stripe id masked, and a color census of the page to the clipboard. Nothing is sent anywhere; paste it into a bug report.">Copy report</button>
+    </div>
+    <p class="hint"><a id="feedback" href="#" hidden>Send feedback</a><span id="feedback-sep" hidden> · </span>Shortcut <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> · Runs only on dashboard.stripe.com · Collects nothing.</p>
+    <p class="status" id="status"></p>
+  </main>
+  <footer>
+    <a class="made" href="https://lunarcrush.com" target="_blank" rel="noopener">Made by <img src="lc-wordmark.svg" alt="LunarCrush"></a>
+    <span class="ver" id="ver"></span>
+  </footer>
+  <script src="popup.js"></script>
+</body></html>

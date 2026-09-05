@@ -1,0 +1,34 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Manifest checks
+        run: |
+          python3 - <<'PY'
+          import json; m=json.load(open("manifest.json"))
+          assert m["manifest_version"]==3
+          assert len(m["name"])<=45, "name > 45 chars"
+          assert len(m["description"])<=132, "description > 132 chars"
+          assert m["version"].count(".")==2
+          print("manifest ok:", m["name"], m["version"])
+          PY
+      - name: Build
+        run: bash build.sh
+      - name: Install Playwright Chromium
+        run: pip install playwright pillow && playwright install --with-deps chromium
+      - name: Smoke test (packaged Chrome build)
+        run: python3 tests/smoke.py --ext dist/build/chrome
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages-${{ github.sha }}
+          path: |
+            dist/*.zip
+            dist/SHA256SUMS

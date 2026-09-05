@@ -1,0 +1,76 @@
+<!doctype html><html><head><meta charset="utf-8"><title>promo</title>
+<style>
+@font-face{font-family:"Plus Jakarta Sans";src:url(../../popup/fonts/PlusJakartaSans-Variable.woff2) format("woff2");font-weight:200 800}
+@font-face{font-family:Butler;src:url(../brand/_fetched/Butler-Free-Lgt.otf) format("opentype");font-weight:300 500}
+:root{--canvas:#0B121E;--card:#0D1522;--heading:#fff;--body:#A0A5B8;--muted:#6B7290;--green:#14B881;--green-bright:#4ADE80;--blue:#6EA6F8;--border:rgba(255,255,255,0.06);--border-strong:rgba(255,255,255,0.10)}
+*{box-sizing:border-box}html,body{margin:0;background:var(--canvas)}
+body{font-family:"Plus Jakarta Sans",-apple-system,sans-serif;color:var(--body);-webkit-font-smoothing:antialiased}
+.tile{position:relative;overflow:hidden;background:var(--canvas)}
+.glow{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none}
+.g1{background:rgba(20,184,129,.35)}.g2{background:rgba(110,166,248,.28)}
+.wm{height:22px;width:auto;display:block}
+.kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--blue)}
+h1{color:var(--heading);font-weight:600;letter-spacing:-1px;line-height:1.08;margin:0}
+h1 em{font-family:Butler,"Plus Jakarta Sans",serif;font-style:normal;font-weight:400;color:var(--green-bright)}
+p{margin:0;line-height:1.5}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border-strong);border-radius:999px;padding:6px 12px 6px 8px;font-size:12px;color:var(--body);background:rgba(255,255,255,.04)}
+.chip img{height:14px;width:auto}
+.shot{position:absolute;border-radius:14px;border:1px solid var(--border-strong);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.4);overflow:hidden;background:#141414}
+.shot img{display:block;width:100%;height:auto}
+/* small 440x280 */
+.small{width:440px;height:280px;padding:26px 28px}
+.small .g1{width:360px;height:360px;left:-140px;top:-160px}.small .g2{width:300px;height:300px;right:-120px;bottom:-160px}
+.small .wm{height:16px}
+.small h1{font-size:30px;margin-top:14px;max-width:290px}
+.small p{font-size:12.5px;margin-top:10px;max-width:250px}
+.small .chip{position:absolute;left:28px;bottom:24px}
+.small .shot{width:300px;right:-150px;bottom:-70px;transform:rotate(-6deg)}
+/* marquee 1400x560 */
+.marq{width:1400px;height:560px;padding:64px 72px}
+.marq .g1{width:900px;height:900px;left:-360px;top:-420px}.marq .g2{width:800px;height:800px;right:-200px;bottom:-460px}
+.marq .kicker{margin-top:44px}
+.marq h1{font-size:60px;margin-top:14px;max-width:620px}
+.marq p{font-size:19px;margin-top:22px;max-width:520px}
+.marq .chips{display:flex;gap:10px;margin-top:34px}
+.marq .chip{font-size:14px;padding:9px 16px 9px 12px}
+.marq .chip img{height:18px}
+.marq .shot{width:760px;right:-120px;top:70px;transform:rotate(-5deg) translateY(10px)}
+/* feature card 1280x800 */
+.feat{width:1280px;height:800px;padding:64px 72px}
+.feat .g1{width:900px;height:900px;left:-400px;top:-420px}.feat .g2{width:800px;height:800px;right:-260px;bottom:-480px}
+.feat h1{font-size:56px;margin-top:16px;max-width:600px}
+.feat p.lead{font-size:20px;margin-top:20px;max-width:520px}
+.feat ul{list-style:none;padding:0;margin:34px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:16px 28px;max-width:560px}
+.feat li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;color:var(--heading);line-height:1.4}
+.feat li small{display:block;color:var(--body);font-size:13px;margin-top:2px;font-weight:400}
+.feat li i{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(20,184,129,.16);display:grid;place-items:center;color:var(--green-bright);font-style:normal;font-size:14px;font-weight:700}
+.feat .shot{width:640px;right:-150px;top:120px;transform:rotate(-5deg)}
+.feat .chip{position:absolute;left:72px;bottom:56px}
+</style></head><body>
+<script>
+const q=new URLSearchParams(location.search), kind=q.get("kind")||"small", shot=q.get("shot")||"../assets/01-dashboard-dark.png";
+const WM='<img class="wm" src="../brand/full-white.svg" alt="LunarCrush">';
+const MADE=`<span class="chip">Made by <img src="../brand/full-white.svg" alt="LunarCrush"></span>`;
+const T={
+ small:`<div class="tile small"><div class="glow g1"></div><div class="glow g2"></div>${WM}
+   <h1>Dark mode for your <em>Stripe</em> Dashboard</h1><p>One click. Tunable. Images stay true. Zero tracking.</p>${MADE}
+   <div class="shot"><img src="${shot}"></div></div>`,
+ marq:`<div class="tile marq"><div class="glow g1"></div><div class="glow g2"></div>${WM}
+   <div class="kicker">Browser extension</div><h1>Dark mode for your <em>Stripe</em> Dashboard</h1>
+   <p>Stripe's web Dashboard never got a dark theme. This adds one: a real luminance flip that keeps brand hues, charts and photos true.</p>
+   <div class="chips">${MADE}<span class="chip">Free · Runs only on Stripe · No data collected</span></div>
+   <div class="shot"><img src="${shot}"></div></div>`,
+ feat:`<div class="tile feat"><div class="glow g1"></div><div class="glow g2"></div>${WM}
+   <div class="kicker" style="margin-top:36px">Why it feels native</div><h1>Built for people who <em>live</em> in Stripe</h1>
+   <p class="lead">A luminance flip with hue preservation, tuned for the Dashboard, not a generic page darkener.</p>
+   <ul>
+     <li><i>1</i><span>One-click toggle<small>Toolbar button or Alt+Shift+D</small></span></li>
+     <li><i>2</i><span>Tunable<small>Intensity, brightness, contrast, synced across browsers</small></span></li>
+     <li><i>3</i><span>Images stay true<small>Photos and avatars keep their real colors</small></span></li>
+     <li><i>4</i><span>Prints light<small>Invoices and reports come out normal on paper</small></span></li>
+     <li><i>5</i><span>Only on the Dashboard<small>dashboard.stripe.com and the Stripe frames it embeds, nothing else</small></span></li>
+     <li><i>6</i><span>Collects nothing<small>No analytics, no network calls, no accounts</small></span></li>
+   </ul>${MADE}
+   <div class="shot"><img src="${shot}"></div></div>`};
+document.body.innerHTML=T[kind]||T.small;
+</script></body></html>

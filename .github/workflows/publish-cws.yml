@@ -1,0 +1,33 @@
+name: publish-cws
+# Manual: upload + publish the Chrome zip through the Chrome Web Store API.
+# Requires repository secrets CWS_EXTENSION_ID, CWS_CLIENT_ID, CWS_CLIENT_SECRET, CWS_REFRESH_TOKEN (see docs/RELEASE.md).
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish after upload (false = upload as draft only)"
+        type: boolean
+        default: false
+jobs:
+  cws:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: bash build.sh
+      - name: Upload to Chrome Web Store
+        env:
+          EXT_ID: ${{ secrets.CWS_EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          [ -n "$EXT_ID" ] && [ -n "$CLIENT_ID" ] && [ -n "$REFRESH_TOKEN" ] || { echo "CWS secrets not configured"; exit 1; }
+          TOKEN=$(curl -sf "https://oauth2.googleapis.com/token" -d client_id="$CLIENT_ID" -d client_secret="$CLIENT_SECRET" -d refresh_token="$REFRESH_TOKEN" -d grant_type=refresh_token | python3 -c "import sys,json;print(json.load(sys.stdin)['access_token'])")
+          ZIP=$(ls dist/stripe-dark-mode-chrome-v*.zip)
+          curl -sf -H "Authorization: Bearer $TOKEN" -H "x-goog-api-version: 2" -X PUT -T "$ZIP" "https://www.googleapis.com/upload/chromewebstore/v1.1/items/$EXT_ID" | tee upload.json
+          python3 -c "import json;d=json.load(open('upload.json'));assert d.get('uploadState')=='SUCCESS',d"
+          if [ "${{ inputs.publish }}" = "true" ]; then
+            curl -sf -H "Authorization: Bearer $TOKEN" -H "x-goog-api-version: 2" -H "Content-Length: 0" -X POST "https://www.googleapis.com/chromewebstore/v1.1/items/$EXT_ID/publish" | tee publish.json
+          fi

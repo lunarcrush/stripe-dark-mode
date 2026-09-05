@@ -1,0 +1,20 @@
+/* ==UserStyle==
+@name           Dark Mode for Stripe Dashboard by LunarCrush
+@namespace      lunarcrush.com
+@version        1.0.0
+@description    A clean dark theme for dashboard.stripe.com. Luminance inversion with hue preservation; images keep their true colors. Same engine as the browser extension. Made by LunarCrush.
+@author         LunarCrush
+@license        MIT
+@preprocessor   default
+@var range intensity "Intensity" [0.92, 0.85, 1, 0.01]
+@var checkbox keepImages "Keep images in true color" 1
+==/UserStyle== */
+@-moz-document domain("dashboard.stripe.com") {
+  @media screen {
+    html { filter: invert(var(--sdm-invert, 0.92)) hue-rotate(180deg) !important; background-color: #fff !important; color-scheme: dark; --sdm-invert: intensity; }
+    html :is(img, picture, video, [style*="background-image"], svg image) { filter: invert(1) hue-rotate(180deg) !important; }
+    html :is(img[src$=".svg"], img[src*="icon"], img[src*="logo"], img[width="16"], img[width="20"], img[width="24"]) { filter: none !important; }
+    html [style*="box-shadow"] { box-shadow: none !important; }
+  }
+  @media print { html, html * { filter: none !important; } }
+}

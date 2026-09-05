@@ -1,0 +1,8 @@
+dist/
+.DS_Store
+__pycache__/
+*.pyc
+store/assets/_raw-*.png
+store/brand/_fetched/
+.venv/
+node_modules/
