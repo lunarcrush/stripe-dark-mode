@@ -20,7 +20,7 @@ jobs:
       - name: Install Playwright Chromium
         run: pip install playwright pillow && playwright install --with-deps chromium
       - name: Smoke test (packaged Chrome build)
-        run: python3 tests/smoke.py --ext dist/build/chrome
+        run: python3 tests/smoke.py --ext chrome
       - name: Release notes from CHANGELOG
         run: |
           V=${GITHUB_REF_NAME#v}

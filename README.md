@@ -36,7 +36,7 @@ build.sh          → dist/*.zip + SHA256SUMS
 
 ```
 bash build.sh                                  # packages
-python3 tests/smoke.py --ext dist/build/chrome # proves the packaged Chrome build works
+python3 tests/smoke.py --ext chrome # proves the packaged Chrome build works
 python3 store/tools/make_icons.py              # regenerate icons from icons/icon.svg
 python3 store/tools/capture.py                 # regenerate every store asset from the synthetic mock
 ```

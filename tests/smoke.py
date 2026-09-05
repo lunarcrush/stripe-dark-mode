@@ -1,12 +1,14 @@
 """Smoke test: load the extension into Chromium, route dashboard.stripe.com to the synthetic mock, and prove the theme
 engages, disengages, keeps images true, and that the popup renders with the right version.
-Usage: python3 tests/smoke.py [--ext <dir>]   (default: the packaged Chrome build in dist/build/chrome, else the repo root)
+Usage: python3 tests/smoke.py [--ext chrome|repo]   (chrome = the packaged build in dist/build/chrome, repo = the repo root;
+default: chrome if it has been built, else repo)
 Exit code 0 = pass. Prints one JSON line per check."""
 import asyncio, os, sys, json, tempfile, argparse, re, shutil
 from playwright.async_api import async_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ap = argparse.ArgumentParser(); ap.add_argument("--ext", default=None); args = ap.parse_args()
-EXT = os.path.abspath(args.ext or (os.path.join(ROOT, "dist", "build", "chrome") if os.path.isdir(os.path.join(ROOT, "dist", "build", "chrome")) else ROOT))
+BUILDS = {"chrome": os.path.join(ROOT, "dist", "build", "chrome"), "repo": ROOT}  # the only two trees Chromium can load
+ap = argparse.ArgumentParser(); ap.add_argument("--ext", choices=sorted(BUILDS), default=None); args = ap.parse_args()
+EXT = BUILDS["chrome"] if args.ext == "chrome" or (args.ext is None and os.path.isdir(BUILDS["chrome"])) else BUILDS["repo"]
 MOCK = open(os.path.join(ROOT, "store", "mock", "index.html"), encoding="utf-8").read()
 MANIFEST = json.load(open(os.path.join(EXT, "manifest.json")))
 FRAME = """<html><body style="background:#fff;color:#111"><p>invoice preview</p><img id=i width=60 height=60 src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><rect width='60' height='60' fill='%23ff0000'/></svg>"></body></html>"""

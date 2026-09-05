@@ -2,6 +2,9 @@
 
 All notable changes to this project are documented here. Versions follow [SemVer](https://semver.org); the `version` in `manifest.json` is the source of truth and every release is tagged `v<version>`.
 
+## [Unreleased]
+- Repo hygiene from a Snyk Code scan, none of it in the shipped package: the promo-tile generator (`store/tools/promo.html`) now allowlists its `?kind`/`?shot` query params and never writes them into HTML; the smoke test's `--ext` takes a build name (`chrome`/`repo`) instead of a filesystem path.
+
 ## [1.0.2] - 2026-09-04
 - Icon recolored into a palette that belongs in Stripe's world (pale lavender / deep navy, blurple crescent) while keeping the extension's own inverted-crescent mark. No Stripe logo or wordmark is used.
 
